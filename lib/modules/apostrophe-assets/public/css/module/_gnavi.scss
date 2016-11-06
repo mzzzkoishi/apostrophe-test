@@ -1,0 +1,24 @@
+.gnavi {
+  width: 100%;
+  background-color: $c_black;
+  padding: 20px;
+}
+
+.gnavi-navi {
+  li {
+    display: inline-block;
+    margin-right: 20px;
+    &:last-child {
+      margin-right: 0;
+    }
+    a {
+      color: #fff;
+      @include f_josefin;
+      font-size: 20px;
+      &:hover {
+        color: $c_green;
+      }
+
+    }
+  }  
+}

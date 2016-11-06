@@ -1,0 +1,19 @@
+.heroTxt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: $c_black;
+  padding: 0 30px;
+  color: $c_green;
+  font-size: 100px;
+  @include f_bevan;
+}
+
+.text_pageHeading {
+  color: $c_green;
+  @include f_bevan;
+  font-size: 50px;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 3px $c_black;
+}

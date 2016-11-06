@@ -1,0 +1,12 @@
+<nav class="gnavi">
+  <ul class="gnavi-navi">
+    <li><a href="{{ data.home._url }}">Home</a></li>
+    <li><a href="{{ data.home._url }}about">About</a></li>
+    <li><a href="{{ data.home._url }}items">Items</a></li>
+    <li><a href="{{ data.home._url }}help">Help</a></li>
+  </ul>
+  {% if not data.user %}
+  <p class="login"><a class="login-link" href="/login">Login</a></p>
+  {% endif %}
+
+</nav>

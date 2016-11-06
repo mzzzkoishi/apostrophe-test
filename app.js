@@ -1,9 +1,6 @@
 var apos = require('apostrophe')({
   shortName: 'apostrophe-test',
   title: 'apostrophe-test',
-  assets: {
-    stylesheets: ['style'] 
-  },
   // These are the modules we want to bring into the project.
   modules: {
     // This configures the apostrophe-users module to add an admin-level

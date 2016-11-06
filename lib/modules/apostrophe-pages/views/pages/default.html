@@ -1,10 +1,34 @@
 {% extends data.outerLayout %}
+
+{% block title %}Home{% endblock %}
+
 {% block beforeMain %}
-<div class="block hero">
-  <div class="inner">
-    <div class="hero-text">
-      <h4>Welcome to my first Apostrophe site!</h4>
+{% include "gnavi.html" %}
+{% endblock %}
+
+{% block main %}
+<div class="l-container">
+  <h2 class="text_pageHeading">{{ data.page.slug }}</h2>
+  <div class="l-main">
+    <div class="l-textArea">
+      {{ apos.singleton(data.page, 'textBlock', 'apostrophe-rich-text', {
+      toolbar: [ 'Styles', 'Bold', 'Italic' ],
+      styles: [
+      { name: 'Heading', element: 'h3' },
+      { name: 'Heading secondary', element: 'h4' },
+      { name: 'p', element: 'p' }
+      ]
+      }) }}
+    </div>
+    <div class="l-imageArea">
+      {{ apos.singleton(data.page, 'heroPic', 'apostrophe-images', {
+      minSize: [ 700, 350 ],
+      aspectRatio: [ 2, 1 ],
+      limit: 1,
+      size: 'full'
+      }) }}
     </div>
   </div>
 </div>
 {% endblock %}
+

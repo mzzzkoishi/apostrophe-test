@@ -1,0 +1,26 @@
+.apos-rich-text {
+  h3 {
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+  h4 {
+    font-weight: bold;
+    font-size: 23px;
+    border-bottom: 1px solid $c_black;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+  }
+  p {
+    margin-bottom: 1em;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  strong {
+    font-weight: bold;
+  }
+  em {
+    font-style: italic;
+  }
+}
