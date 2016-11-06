@@ -1,17 +1,21 @@
-var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
-var jshint = require('gulp-jshint');
-var concat = require('gulp-concat');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var notifier = require('node-notifier');
-var uglify = require('gulp-uglify');
-var sequence = require('run-sequence');
-var util = require('gulp-util');
-var rename = require('gulp-rename');
-var neat = require('node-neat').includePaths;
-var path = require('path');
-var browserSync = require('browser-sync');
+var gulp = require('gulp'),
+    nodemon = require('gulp-nodemon'),
+    concat = require('gulp-concat'),
+    sass = require('gulp-sass'),
+    pleeease = require('gulp-pleeease'),
+    bulkSass = require('gulp-sass-bulk-import'),
+    header = require('gulp-header'),
+    sourcemaps = require('gulp-sourcemaps'),
+    plumber = require('gulp-plumber'),
+    notifier = require('node-notifier'),
+    uglify = require('gulp-uglify'),
+    sequence = require('run-sequence'),
+    util = require('gulp-util'),
+    neat = require('node-neat').includePaths,
+    rename = require('gulp-rename'),
+    notify = require('gulp-notify'),
+    path = require('path'),
+    browserSync = require('browser-sync');
 
 // we'd need a slight delay to reload browsers
 // connected to browser-sync after restarting nodemon
@@ -33,57 +37,51 @@ function sassErrorHandler(err) {
   });
 }
 
-gulp.task('lint', function () {
-  gulp.src('./**/*.js')
-    .pipe(jshint())
-})
 
-gulp.task('styles', function () {
+gulp.task('styles', function() {
   util.log('Building Styles');
 
-  return gulp.src('public/css/main.scss')
+  return gulp.src('lib/modules/apostrophe-assets/public/css/style.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({
-      onError: sassErrorHandler,
-      includePaths: ['styles'].concat(neat)
-    }))
+    onError: sassErrorHandler,
+    includePaths: ['styles'].concat(neat)
+  }))
     .pipe(sourcemaps.write())
-    .pipe(rename(function (path) {
-      path.dirname = "public/css/";
-      path.basename = "main";
-      path.extname = ".less"
-    }))
+    .pipe(rename(function(path) {
+    path.dirname = "lib/modules/apostrophe-assets/public/css/";
+    path.basename = "style";
+    path.extname = ".less"
+  }))
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('watch', function () {
+gulp.task('watch', function() {
   console.log('watching')
-  gulp.watch('public/css/**/*.scss', ['styles']);
+  gulp.watch('lib/modules/apostrophe-assets/public/css/**/*.scss', ['styles']);
 });
 
 gulp.task('nodemon', function (cb) {
   var called = false;
   return nodemon({
-      script: 'app.js',
-      ext: 'html js',
-      watch: ["views/", "public/css/*", "app.js", "lib/"],
-    })
+    script: 'app.js',
+    ext: 'html js',
+    watch: ["views/", "lib/modules/apostrophe-assets/public/css/*", "app.js", "lib/"],
+  })
     .on('start', function onStart() {
-      // ensure start only got called once
-      if (!called) {
-        cb();
-      }
-      called = true;
-    })
+    // ensure start only got called once
+    if (!called) { cb(); }
+    called = true;
+  })
     .on('change', ['styles'])
     .on('restart', function () {
-      console.log('restarting');
-      setTimeout(function reload() {
-        browserSync.reload({
-          stream: false
-        });
-      }, BROWSER_SYNC_RELOAD_DELAY);
-    })
+    console.log('restarting');
+    setTimeout(function reload() {
+      browserSync.reload({
+        stream: false
+      });
+    }, BROWSER_SYNC_RELOAD_DELAY);
+  })
 });
 
 // Make sure `nodemon` is started before running `browser-sync`.
