@@ -1,0 +1,162 @@
+/* -----------------
+  @extend clearfix
+----------------- */
+%clearfix {
+  *zoom: 1;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+
+/* -----------------
+@include MediaQuery
+----------------- */
+@mixin mqPC_L {
+  //$widthXL（1280px）以上の場合
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin mqPC_M {
+  //$widthSM（770px）〜$widthMD（1279px）の場合
+  @media (min-width: 770px) and (max-width: (1279px)) {
+    @content;
+  }
+}
+
+@mixin mqPC {
+  //$widthXL（770px）以上の場合
+  @media (min-width: 770px) {
+    @content;
+  }
+}
+
+@mixin mqSP {
+  //$widthSM-1（769px）以下の場合
+  @media (max-width: (769px)) {
+    @content;
+  }
+}
+
+@mixin mqPC_LOW {
+  @media (max-height: 850px) and (min-width: 770px) {
+    @content;
+  }
+}
+
+//.sample {
+//  width: 100%;
+//  @include mqSM {
+//    width: 50%;
+// }
+//}
+
+
+/* -----------------
+@extend clearfix
+----------------- */
+.clearfix {
+  *zoom: 1;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+//.sample {
+//  @extend %clearfix;
+//}
+
+
+@mixin clearfix {
+  *zoom: 1;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+
+@mixin icofont {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin flex {
+  display: flex!important;
+  display: -webkit-flex!important;
+  display: -moz-flex!important;
+  display: -ms-flexbox!important;
+  display: -o-flex!important;
+
+  flex-direction: column!important;
+  -webkit-flex-direction: column!important;
+  -moz-flex-direction: column!important;
+  -ms-flex-direction: column!important;
+  -o-flex-direction: column!important;
+}
+
+@mixin r-sprite-width($sprite) {
+  width: nth($sprite, 5)/1.5;
+}
+
+@mixin r-sprite-height($sprite) {
+  height: nth($sprite, 6)/1.5;
+}
+
+@mixin r-sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3)/1.5;
+  $sprite-offset-y: nth($sprite, 4)/1.5;
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin r-sprite-size($sprite) {
+  background-size: nth($sprite, 7)/1.5 nth($sprite, 8)/1.5;
+}
+
+@mixin r-sprite($sprite) {
+  @include sprite-image($sprite);
+  @include r-sprite-position($sprite);
+  @include r-sprite-width($sprite);
+  @include r-sprite-height($sprite);
+  @include r-sprite-size($sprite);
+}
+
+
+@mixin clamp($line) {
+  height: #{$line}em;
+  position: relative;
+  overflow: hidden;
+  padding-right: 1em;
+  &:before {
+    content: "...";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: inline-block;
+    width: 1em;
+  }
+  &:after {
+    content: "";
+    position: relative;
+    right: -1em;
+    float: right;
+    width: 1em;
+    height: 100%;
+    background-color: inherit;
+  }
+}

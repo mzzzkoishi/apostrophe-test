@@ -43,16 +43,24 @@ gulp.task('styles', function() {
 
   return gulp.src('lib/modules/apostrophe-assets/public/css/style.scss')
     .pipe(sourcemaps.init())
+    .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
+    .pipe(bulkSass())
     .pipe(sass({
-    onError: sassErrorHandler,
-    includePaths: ['styles'].concat(neat)
-  }))
+      onError: sassErrorHandler,
+      includePaths: ['styles'].concat(neat)
+    }))
+    .pipe(pleeease({
+      fallbacks: {
+        autoprefixer: ['ie 9']
+      },
+      minifier: true
+    }))
     .pipe(sourcemaps.write())
     .pipe(rename(function(path) {
-    path.dirname = "lib/modules/apostrophe-assets/public/css/";
-    path.basename = "style";
-    path.extname = ".less"
-  }))
+      path.dirname = "lib/modules/apostrophe-assets/public/css/";
+      path.basename = "style";
+      path.extname = ".less"
+    }))
     .pipe(gulp.dest('./'));
 });
 

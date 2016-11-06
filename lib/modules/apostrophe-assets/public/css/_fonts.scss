@@ -1,0 +1,23 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,700,300);
+
+$ff_yuGothic: 'YuGothic', 'Yu Gothic', '游ゴシック', '游ゴシック体', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'Noto Sans Japanese', sans-serif;
+$ff_mincho: "游明朝", YuMincho, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+
+$ff_oswald: 'Oswald', sans-serif;
+
+@mixin f_mincho {
+  font-family: $ff_mincho;
+  letter-spacing: 0.07em;
+}
+
+@mixin f_oswald {
+  font-family: $ff_oswald;
+  letter-spacing: 0.09em;
+}
+
+
+
+body {
+  font-family: "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;;
+  font-weight: 500;
+}
